@@ -18,11 +18,12 @@ app.use(bodyParser.json());
 
 // Create routes
 // "/" represents homepage
+// (req, res) - callback function
 app.get('/', (req, res) => {
-    console.log('Testing!');
-
+    //console.log('Testing!');
     res.send('Hey from homepage.');
 });
+
  
 // Listen for incoming POST requests
 // Using backtick notation for template
