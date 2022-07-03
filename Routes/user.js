@@ -3,8 +3,9 @@ import express from 'express';
 // Initialize router
 const router = express.Router();
 
-// Initialize routes to /users
-router.get('/users', (req, res) => {
+// Initialize routes to /user
+// All routes start with /user
+router.get('/', (req, res) => {
     res.send('Welcome');
 });
 

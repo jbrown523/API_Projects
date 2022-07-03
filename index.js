@@ -1,4 +1,3 @@
-// JSON uses single quotes
 // index.js is used to setup the server
 
 import express from 'express';
