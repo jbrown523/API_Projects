@@ -1,22 +1,13 @@
 import express from 'express';
 
+// Configure Unique ID generator for Users - User ID's
+import { v4 as uuidv4 } from 'uuid';
+uuidv4(); // ⇨ '9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d'
+
 // Initialize router
 const router = express.Router();
-
-const user = [
-
-    {
-        firstName: "Jalen",
-        lastName: "B",
-        age: 21
-    },
-    {
-        firstName: "Mikel",
-        lastName: "B",
-        age: 22
-    }
-    
-]
+// Array of users
+const user = []
 
 
 // Initialize routes to /user
@@ -27,21 +18,38 @@ router.get('/', (req, res) => {
     res.send(user);
 });
 
-// Send data frorm client to server
+// Send  data frorm client to server
 // Cannot use browser to test post request, browsers only make GET requests 
 // Add user to database
 router.post('/', (req, res) => {
-    // POST request have req.body
+    // POST request have req.body - info about the request
     // {firstName: 'Jalen', lastName: 'B', age: 21 }
 
     // newUser defined as the body of the POST request
     // POST request via POSTMAN
     const newUser = req.body
+
     // Add values to user array
-    user.push(newUser);
+    // Create new user w/ user ID
+    // ...user - spreads all properties of user: name age, etc ...
+    // id: uuidv4() - adds user ID
+    user.push({...newUser, id: uuidv4()});
 
     // Output to client
+    // ${inline variable}
     res.send(`User with name ${newUser.firstName} added to the database.`); // See output in browser
+});
+
+// : means anything after '/' will work 
+// whatever is after the 'user/' is the parameter
+// /user/2 => req.params {id:2}
+router.get('/:id', (req, res) => {
+    const {id} = req.params.id;
+
+    // Find user with the same id
+   const findUser = user.find(user => user.id === id);
+
+   res.send(findUser);
 });
 
 export default router;
