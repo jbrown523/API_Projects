@@ -7,6 +7,11 @@ import express, { request, response } from 'express';
 // Allows cincoming post request bodies
 import bodyParser from 'body-parser';
 
+// Adding user.js -rotuer to scope
+// Can name default imports anything, used userRoutes 
+
+import usersRoutes from './Routes/users.js';
+
 // Initialize Express
 const app = express()
 // Captialize PORT - never change
@@ -16,6 +21,10 @@ const PORT = 5000;
 // Using json data in application
 // Common format for sending/request data from rest API
 app.use(bodyParser.json());
+
+// Starting path for all files with /user
+// userRoutes - routes imported from ./Routes/user.js
+app.use('/users', usersRoutes);
 
 // Create routes
 // "/" represents homepage (root)
