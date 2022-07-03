@@ -10,7 +10,7 @@ const router = express.Router();
 const user = []
 
 
-// Initialize routes to /user
+// Initialize routes to /user.
 // All routes start with /user
 // Get users in database
 router.get('/', (req, res) => {
