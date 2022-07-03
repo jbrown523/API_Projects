@@ -11,8 +11,8 @@ const user = [
         age: 21
     },
     {
-        firstName: "kane",
-        lastName: "ke",
+        firstName: "Mikel",
+        lastName: "B",
         age: 22
     }
     
@@ -21,28 +21,27 @@ const user = [
 
 // Initialize routes to /user
 // All routes start with /user
+// Get users in database
 router.get('/', (req, res) => {
-    console.log(user);
-    // res.send - Output to client
+    // res.send - Output to client (browser)
     res.send(user);
 });
 
 // Send data frorm client to server
 // Cannot use browser to test post request, browsers only make GET requests 
-// 
+// Add user to database
 router.post('/', (req, res) => {
-    console.log("POSTMAN REACHED");
-
     // POST request have req.body
-    console.log(req.body);
+    // {firstName: 'Jalen', lastName: 'B', age: 21 }
 
+    // newUser defined as the body of the POST request
+    // POST request via POSTMAN
     const newUser = req.body
-
     // Add values to user array
     user.push(newUser);
 
     // Output to client
-    res.send(`User with name ${newUser.name} added to the database.`); // See output in browser
+    res.send(`User with name ${newUser.firstName} added to the database.`); // See output in browser
 });
 
 export default router;
