@@ -1,4 +1,5 @@
 // JSON uses single quotes
+// index.js is used to setup the server
 
 import express, { request, response } from 'express';
 //const express = require("express");
@@ -17,12 +18,9 @@ const PORT = 5000;
 app.use(bodyParser.json());
 
 // Create routes
-// "/" represents homepage
+// "/" represents homepage (root)
 // (req, res) - callback function
-app.get('/', (req, res) => {
-    //console.log('Testing!');
-    res.send('Hey from homepage.');
-});
+app.get('/', (request, response) => {res.send('Hey from homepage.');});
 
  
 // Listen for incoming POST requests
