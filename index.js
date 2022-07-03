@@ -1,15 +1,14 @@
 // JSON uses single quotes
 // index.js is used to setup the server
 
-import express, { request, response } from 'express';
-//const express = require("express");
+import express from 'express';
+//const express = require("express"); ^
 
-// Allows cincoming post request bodies
+// Allows incoming post request bodies
 import bodyParser from 'body-parser';
 
-// Adding user.js -rotuer to scope
+// Adding user.js to scope
 // Can name default imports anything, used userRoutes 
-
 import usersRoutes from './Routes/user.js';
 
 // Initialize Express
@@ -24,12 +23,12 @@ app.use(bodyParser.json());
 
 // Starting path for all files with /user
 // userRoutes - routes imported from ./Routes/user.js
-app.use('/users', usersRoutes);
+app.use('/user', usersRoutes);
 
 // Create routes
 // "/" represents homepage (root)
 // (req, res) - callback function
-app.get('/', (request, response) => {res.send('Hey from homepage.');});
+app.get('/', (req, res) => {res.send('Hey from homepage.');});
 
  
 // Listen for incoming POST requests
