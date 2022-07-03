@@ -10,7 +10,7 @@ import bodyParser from 'body-parser';
 // Adding user.js -rotuer to scope
 // Can name default imports anything, used userRoutes 
 
-import usersRoutes from './Routes/users.js';
+import usersRoutes from './Routes/user.js';
 
 // Initialize Express
 const app = express()

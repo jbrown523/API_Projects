@@ -1,4 +1,4 @@
-import exports from 'express';
+import express from 'express';
 
 // Initialize router
 const router = express.Router();
