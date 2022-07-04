@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { response } from 'express';
 
 // Configure Unique ID generator for Users - User ID's
 import { v4 as uuidv4 } from 'uuid';
@@ -20,7 +20,7 @@ router.get('/', (req, res) => {
     res.send(user);
 });
 
-// Send  data frorm client to server
+// Send data frorm client to server
 // Cannot use browser to test post request, browsers only make GET requests 
 // Add user to database**
 router.post('/', (req, res) => {
@@ -45,17 +45,20 @@ router.post('/', (req, res) => {
 // : means anything after '/' will work 
 // whatever is after the 'user/' is the parameter
 // /user/2 => req.params {id:2}
+// Retrieve User**
 router.get('/:id', (req, res) => {
-    const {id} = req.params.id;
+    // Get the id from the URL, after /User
+    const {id} = req.params;
 
     // Find user with the same id
-    const findUser = user.find(user => user.id === id);
+    const findUser = user.find((user) => user.id === id);
 
    res.send(findUser);
 });
 
 // Delete User** 
 router.get('/:id', (req, res) => {
+    // Get the id from the URL, after /User
     const {id} = req.params;
 
     // Id to delete 123
@@ -66,9 +69,33 @@ router.get('/:id', (req, res) => {
     // B/c !==, if the user.id = id, then delete
     // Returns false b/c the id is equal, so Jalen is deleted
     // Kane is not equal, returns true, keep Kane
-    user = user.filter(user => user.id !== id);
+    deleteUser = deleteUser.filter((user) => user.id !== id);
+
+    // Using user array defined locally
+    // Typically will use database to access and modify
 
     res.send(`User with the id ${user.id} is deleted`);
+});
+
+// Patch/Udpate user**
+router.patch('/:id', (req, res) => {
+    // Receive a req parameter
+    // Get the id from the URL, after /User
+    const {id}  = req.params;
+
+    // Change what we receive from the req.body
+    // User cannot change id
+    const {firstName, lastName, age} = req.body;
+
+    // 1st find the user
+    // Match user id, wit the target id
+    const updatedUser = user.find((updatedUser) => updatedUser.id === id);
+
+    if(firstName) updatedUser.firstName = firstName;
+    if(lastName) updatedUser.firstName = lastName;
+    if(firstName) updatedUser.age = age;
+
+    response.send(`User with id ${id} has been updated`);
 });
 
 export default router;
