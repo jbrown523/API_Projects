@@ -63,12 +63,12 @@ export const deleteUser = (req, res) => {
     // B/c !==, if the user.id = id, then delete
     // Returns false b/c the id is equal, so Jalen is deleted
     // Kane is not equal, returns true, keep Kane
-    deleteUser = user.filter((user) => user.id !== id);
+    user = user.filter((user) => user.id !== id);
 
     // Using user array defined locally
     // Typically will use database to access and modify
 
-    res.send(`User with the id ${user.id} is deleted`);
+    res.send(`User with the id ${id} has been deleted`);
 }
 
 // Patch/Udpate user**
@@ -83,11 +83,11 @@ export const updateUser = (req, res) => {
 
     // 1st find the user
     // Match user id, wit the target id
-    const updatedUser = user.find((user) => user.id === id);
+    const updateUser = user.find((updatedUser) => updatedUser.id === id);
 
-    if(firstName) updatedUser.firstName = firstName;
-    if(lastName) updatedUser.firstName = lastName;
-    if(firstName) updatedUser.age = age;
+    if(firstName) updateUser.firstName = firstName;
+    if(lastName) updateUser.firstName = lastName;
+    if(age) updateUser.age = age;
 
-    response.send(`User with id ${id} has been updated`);
+    res.send(`User with id ${id} has been updated`);
 }
